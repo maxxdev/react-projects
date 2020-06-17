@@ -4,14 +4,14 @@ import Context from "./context";
 import Loader from "./Loader";
 import Modal from "./Modal/Modal";
 
-const AddTodo = React.lazy(() => new Promise(resolve => {
-  setTimeout(() => {
-    resolve(
-      import('./Todo/AddTodo')
-    )
-  }, 3000)
-
-}))
+const AddTodo = React.lazy(() =>
+  new Promise(resolve => {
+    setTimeout(() => {
+      resolve(
+        import('./Todo/AddTodo')
+      )
+    }, 3000)
+  }))
 
 function App() {
   const [todos, setTodos] = React.useState([])
@@ -74,10 +74,10 @@ function App() {
             loading ? null : <p>No Todos</p>
           )
         }
-
       </div>
+
     </Context.Provider>
   )
 }
 
-export default App;
+export default App
