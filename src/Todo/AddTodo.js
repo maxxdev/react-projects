@@ -1,22 +1,34 @@
 import React, {useState} from "react";
 import PropTypes from 'prop-types'
-import TodoList from "./TodoList";
+
+function useInputValue(defaultValue = '') { //custom hook
+  const [value, setValue] = useState(defaultValue)
+  return {
+    bind: {
+      value,
+      onChange: event => setValue(event.target.value)
+    },
+    clear: () => setValue(''),
+    value: () => value
+  }
+}
+
 
 function AddTodo({onCreate}) {
-  const [value, setValue] = useState('')
+  const input = useInputValue('')
 
   function submitHandler(event) {
     event.preventDefault()
-    if (value.trim()) {
-      onCreate(value)
+    if (input.value().trim()) {
+      onCreate(input.value())
+      input.clear()
     }
   }
 
   return (
     <form style={{marginBottom: '1rem'}} onSubmit={submitHandler}>
       <input type="text"
-             value={value}
-             onChange={event => setValue(event.target.value)}
+             {...input.bind}
       />
       <button type="submit">Add Todo</button>
     </form>
