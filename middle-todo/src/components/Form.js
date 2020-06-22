@@ -6,7 +6,12 @@ export const Form = () => {
   const alert = useContext(AlertContext)
   const submitHandler = (event) => {
     event.preventDefault()
-    alert.show(value, 'success')
+    if (value.trim()) {
+      alert.show('Note has created', 'success')
+      setValue('')
+    } else {
+      alert.show('Please enter note')
+    }
   }
   return (
     <form onSubmit={submitHandler}>

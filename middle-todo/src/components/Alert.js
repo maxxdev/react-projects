@@ -7,7 +7,8 @@ export const Alert = () => {
     return null
 
   return (
-    <div className={`alert alert-${alert.type || 'warning'} alert-dismissible fade show`} role="alert">
+    <div className={`alert alert-${alert.type || 'warning'}
+     alert-dismissible fade show`} role="alert">
       <strong>Attention!</strong>
       {alert.text}
       <button onClick={hide}
