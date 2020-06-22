@@ -1,6 +1,13 @@
-import React from "react";
+import React, {useContext} from "react";
+import {AlertContext} from "../context/alert/alertContext";
 
-export const Notes = ({notes}) => {
+export const Notes = ({notes, onRemove}) => {
+  const alert = useContext(AlertContext)
+  const removeItem = (id) => {
+    onRemove(id).then(() => {
+      alert.show('Note has removed', 'success')
+    })
+  }
   return (
     <ul className="list-group">
       {notes.map(note => (
@@ -11,7 +18,9 @@ export const Notes = ({notes}) => {
             <strong>{note.title}</strong>
             <small>{new Date().toLocaleDateString()}</small>
           </div>
-          <button type="button" className="btn btn-outline-danger btn-sm">&times;</button>
+          <button type="button"
+                  onClick={() => removeItem(note.id)}
+                  className="btn btn-outline-danger btn-sm">&times;</button>
         </li>
       ))}
     </ul>
