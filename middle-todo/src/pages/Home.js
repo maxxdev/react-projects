@@ -1,11 +1,13 @@
-import React, {Fragment} from "react";
+import React, {Fragment, useContext, useEffect} from "react";
 import {Form} from "../components/Form";
 import {Notes} from "../components/Notes";
+import {FirebaseContext} from "../context/firebase/firebaseContext";
 
 export const Home = () => {
-  const notes = new Array(3)
-    .fill('')
-    .map((_, i) => ({id: i, title: 'Note'}))
+  const {loading, notes, fetchNotes} = useContext(FirebaseContext)
+  useEffect(() => {
+    fetchNotes()
+  }, [])
 
   return (
     <Fragment>
