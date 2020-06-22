@@ -1,7 +1,7 @@
 import React, {Fragment, useContext, useEffect} from "react";
+import {FirebaseContext} from "../context/firebase/firebaseContext";
 import {Form} from "../components/Form";
 import {Notes} from "../components/Notes";
-import {FirebaseContext} from "../context/firebase/firebaseContext";
 import {Loader} from "../components/Loader";
 
 export const Home = () => {
@@ -19,7 +19,6 @@ export const Home = () => {
         ? <Loader/>
         : <Notes notes={notes}/>
       }
-      <Notes notes={notes}/>
     </Fragment>
   )
 }

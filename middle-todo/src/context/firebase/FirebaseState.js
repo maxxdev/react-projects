@@ -14,12 +14,19 @@ export const FirebaseState = ({children}) => {
   const [state, dispatch] = useReducer(firebaseReducer, initialState)
 
   const showLoader = () => dispatch({type: SHOW_LOADER})
+
   const fetchNotes = async () => {
     showLoader()
     const res = await axios.get(`${url}/notes.json`)
+    const payload = Object.keys(res.data).map(key => {
+      return {
+        ...res.data[key],
+        id: key
+      }
+    })
     dispatch({
       type: FETCH_NOTES,
-      payload: res
+      payload
     })
   }
 
@@ -28,15 +35,24 @@ export const FirebaseState = ({children}) => {
       title,
       date: new Date().toJSON()
     }
-    const res = await axios.post(`${url}/notes.json`, note)
-    dispatch({
-      type: ADD_NOTE,
-      payload: note
-    })
+    try {
+      const res = await axios.post(`${url}/notes.json`, note)
+      const payload = {
+        ...note,
+        id: res.data.name
+      }
+      dispatch({
+        type: ADD_NOTE,
+        payload
+      })
+    } catch (e) {
+      throw new Error(e.message)
+    }
+
   }
 
   const removeNote = async (id) => {
-    const res = await axios.delete(`${url}/notes/${id}.json`)
+    await axios.delete(`${url}/notes/${id}.json`)
     dispatch({
       type: REMOVE_NOTE,
       payload: id

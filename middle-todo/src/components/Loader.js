@@ -1,5 +1,4 @@
 import React from "react";
-import {AlertContext} from "../context/alert/alertContext";
 
 export const Loader = () => {
   return (
