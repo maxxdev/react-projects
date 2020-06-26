@@ -3,8 +3,8 @@ import './App.css';
 import {BrowserRouter, Route} from 'react-router-dom'
 import Navbar from "./components/Navbar/Navbar";
 import Sidebar from "./components/Sidebar/Sidebar";
-import Profile from "./components/Profile/Profile";
-import {Dialogs} from "./components/Dialogs/Dialogs";
+import {ProfilePage} from "./Pages/ProfilePage";
+import {DialogsPage} from "./Pages/DialogsPage";
 
 function App() {
   return (
@@ -13,8 +13,8 @@ function App() {
       <div className="container-fluid">
         <Sidebar/>
         <main role="main" className="col-md-9 ml-sm-auto col-lg-10 px-md-4">
-          <Route path={'/profile'} exact component={Profile}/>
-          <Route path={'/dialogs'} component={Dialogs}/>
+          <Route path={'/profile'} exact component={ProfilePage}/>
+          <Route path={'/dialogs'} component={DialogsPage}/>
         </main>
       </div>
     </BrowserRouter>

@@ -1,6 +1,5 @@
 import React from "react";
 import {NavLink} from "react-router-dom";
-import state from "../../redux/state";
 
 const DialogItem = ({dialog}) => {
   return (
@@ -22,11 +21,7 @@ const MessageItem = ({message}) => {
   )
 }
 
-export const Dialogs = () => {
-
-  const dialogs = state.dialogs
-  const messages = state.messages
-
+export const Dialogs = ({dialogs, messages}) => {
   return (
     <div className="row">
       <div className="col-md-3">
